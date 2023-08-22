@@ -1,0 +1,19 @@
+<body>
+  <div *ngFor="let inews of getNewsDetail">
+    <div class="wrapper">
+      <p class="card-text" id="news-id" style="font-size: 15px;">ID của bài: {{inews.news_id}}</p>
+      <p class="card-text" id="news_writer" style="font-size: 15px;">Tác giả: {{inews.news_ac_id}}</p>
+      <p class="card-text" id="news_date" style="font-size: 15px; float: right">{{inews.news_date}}</p>
+    </div>
+    <div>
+      <h1 id="newsDetailTitle">{{inews.news_title}}</h1>
+    </div>
+    <div id="newsDetailImage" >
+      <img src="{{inews.news_image}}"
+           alt="Exterior photo of {{inews.news_image}}"
+           id="newsImageCover">
+    </div>
+    <div id="newsDetailContent" [innerHTML]="inews.news_content">
+    </div>
+  </div>
+</body>

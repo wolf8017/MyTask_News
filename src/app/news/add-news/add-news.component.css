@@ -1,0 +1,36 @@
+h5{
+  font-weight: bold;
+  font-size: 4em;
+  text-align: center;
+  color: #0f4c81;
+  margin-top: 44px;
+}
+
+form{
+  margin: 44px 100px 200px;
+}
+
+label{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.btn{
+  margin-bottom: 30px;
+  padding: 10px ;
+  background-color: #0f4c81;
+  color: whitesmoke;
+  -webkit-transition: all 0.5s ease-in-out;
+  font-size: 20px;
+  font-weight: bold;
+}
+.btn:hover{
+  background: transparent;
+  color: #0f4c81;
+  cursor: pointer;
+  border-color: #0f4c81;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 224px;
+}

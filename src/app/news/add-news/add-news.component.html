@@ -1,0 +1,53 @@
+<body>
+  <header>
+    <h5>
+      TẠO BẢN TIN MỚI
+    </h5>
+  </header>
+
+  <form class="was-validated" id="formNews" (ngSubmit)="saveNews()">
+    <div class="mb-3">
+      <label class="form-label">Tiêu đề bài báo</label>
+      <input class="form-control form-control-lg"
+             [(ngModel)]="addNews.title"
+             [ngModelOptions]="{standalone: true}"
+             name="title"
+             type="text" placeholder="Tiêu đề bài báo (*)"
+             aria-label=".form-control-lg example"
+             required>
+      <div class="invalid-feedback">Vui lòng điền tiêu đề bài báo</div>
+    </div>
+    <div class="mb-3">
+      <label for="formImage" class="form-label ">Ảnh bìa bài báo</label>
+      <input class="form-control form-control-lg"
+             name="image"
+             type="file"
+             id="formImage"
+             accept="image/png, image/jpeg"
+             (change)="upLoadFile($event)"
+             required>
+      <img id="previewImage"
+           style="max-width: 100%;
+                  max-height: 500px;
+                  margin-left: auto;
+                  margin-right: auto;
+                  display: block;">
+      <div class="invalid-feedback">Vui lòng chọn ảnh bìa bài báo</div>
+    </div>
+    <div class="mb-3">
+      <div class="ckeditorContainer">
+        <label class="form-label">Nội dung bài báo</label>
+        <ckeditor [config]="{placeholder: 'Viết nội dung'}"
+                  [editor]="Editor"
+                  [(ngModel)]="addNews.content"
+                  [ngModelOptions]="{standalone: true}"
+                  tagName="content"
+                  required>
+        </ckeditor>
+        <div class="invalid-feedback">Vui lòng điền nội dung bài báo</div>
+      </div>
+    </div>
+<!--    <button type="button" class="btn btn-primary float-start" name="btn-review">Xem lại bài viết</button>-->
+    <button type="submit" class="btn btn-primary float-end" name="btn-submit">Gửi bài báo</button>
+  </form>
+</body>

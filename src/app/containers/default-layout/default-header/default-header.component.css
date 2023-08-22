@@ -1,0 +1,13 @@
+ul{
+  padding: 10px;
+  background-color: #0f4c81;
+}
+a{
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+#header{
+  width: 100%;
+}

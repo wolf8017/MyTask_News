@@ -1,0 +1,122 @@
+<body>
+  <div class="flex-container">
+    <div class="card" name="card-search">
+      <label>TÌM KIẾM TIN BÀI</label>
+      <div class="card-body">
+        <div class="input-group">
+          <input type="text" class="form-control rounded"  name="search"
+                 placeholder="Tìm kiếm tin bài" aria-label="Search"
+                 [(ngModel)]="searchNews"
+                 [ngModelOptions]="{standalone: true}"
+                 aria-describedby="search-addon"
+                  />
+          <button type="button" class="btn btn-outline-primary">search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 20px 204px 20px 0">
+    <a id="add-btn" class="btn float-end"
+       (click)="gotoAddNews('add-news')">
+      Thêm mới bản tin
+    </a>
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="onUpdateModalLabel">CHỈNH SỬA TIN BÀI</h5>
+          <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="formModal" novalidate *ngIf="iNewsListForm" [formGroup]="iNewsListForm">
+            <div class="mb-3">
+              <label class="col-form-label">ID bài viết:</label>
+              <input id="newsIdModal" class="form-control" type="text"
+                     aria-label="Disabled input example"
+                     formControlName="newsIdModal"
+                     readonly>
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Tác giả:</label>
+              <input id="newsWriterModal" class="form-control" type="text"
+                     aria-label="Disabled input example"
+                     formControlName="newsWriterModal"
+                     readonly>
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Tiêu đề:</label>
+              <input id="newsTitleModal" type="text" class="form-control"
+                     formControlName="newsTitleModal">
+            </div>
+            <div class="mb-3">
+              <label class="form-label ">Ảnh bìa bài báo</label>
+              <input class="form-control"
+                     type="file"
+                     id="newsImageModal"
+                     accept="image/png, image/gif, image/jpeg"
+                     (change)="upLoadFile($event)">
+              <img id="previewImage"
+                   style="margin: 10px auto 10px auto;
+                          display: block;">
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Message:</label>
+              <!--              <textarea id="newsContentModal" class="form-control" [value]="textareaContent"></textarea>-->
+              <ckeditor [editor]="Editor"
+                        [data]=String(editorData)
+                        formControlName="newsContentModal"
+              ></ckeditor>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="button" id="saveData" class="btn btn-primary" (click)="updateNews()">Hoàn tất</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="content">
+    <div id="news_card" fxLayout="row wrap" fxLayoutGap="20px grid">
+      <div
+        fxFlex="20%"
+        fxFlex.xs="100%"
+        fxFlex.sm="33%"
+        *ngFor="let inews of getAllNews">
+        <div class="card mx-auto" style="width: 20rem" name="card-news">
+          <img src="{{inews.news_image}}" class="card-img-top"
+               id="cardImg"
+               alt="Exterior photo of {{inews.news_title}}">
+
+          <button id="btn-edit" type="button" class="btn" (click)="openModal(inews)" data-bs-toggle="modal" data-bs-target="#editModal">
+            <img id="img-edit" src="./assets/icon/edit.svg" alt="Photo of edit" style="width: 16px">
+          </button>
+
+          <button id="btn-delete" type="button" class="btn" (click)="deleteNews(inews)">
+            <img id="img-delete" src="./assets/icon/delete.svg" alt="Photo of delete" style="width: 16px">
+          </button>
+
+          <div class="card-body">
+            <h5 class="card-title" id="news-title" style="color: #0f4c81">{{inews.news_title}}</h5>
+            <p class="card-text" id="news-content" [innerHTML]="inews.news_content"></p>
+            <p class="card-text" id="news-id" style="font-size: 10px; margin-bottom: 0%">ID của bài: {{inews.news_id}}</p>
+            <p class="card-text" style="font-size: 10px">Tác giả: {{inews.news_ac_id}}</p>
+            <p class="card-text" style="font-size: 10px; margin-top: -15px">Ngày đăng:</p>
+            <p class="card-text" style="font-size: 10px; margin-top: -15px">{{inews.news_date}}</p>
+
+            <a class="btn float-end" id="news-btn" (click)="gotoDetails(String(inews.news_id))"
+               >Đọc tiếp</a>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+

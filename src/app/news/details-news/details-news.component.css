@@ -1,0 +1,24 @@
+body{
+  background-color: antiquewhite;
+  margin-bottom: -50px;
+  padding: 50px 100px 50px 100px;
+}
+
+.wrapper{
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.wrapper > p {
+  margin: 5px;
+  display: inline-block;
+  color: #97979b;
+}
+
+#newsImageCover{
+  max-height: 500px;
+  max-width: 100%;
+  display: block;
+  margin: 20px auto 20px auto;
+}
+
